@@ -84,12 +84,15 @@ def load_file(file):
     # --------------------------------------------------
 
     elif extension in ["xlsx", "xls"]:
+        
+        engine = "openpyxl" if extension == "xlsx" else "xlrd"
+        
 
         file.seek(0)
 
         try:
             # Get available sheets
-            excel_file = pd.ExcelFile(file)
+            excel_file = pd.ExcelFile(file,engine = engine)
             sheet_names = excel_file.sheet_names
 
             # For now, load the first sheet
